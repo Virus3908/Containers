@@ -108,7 +108,8 @@ VectorIterator<T> VectorIterator<T>::operator+(int val) {
 }
 
 template <typename T>
-typename VectorIterator<T>::difference_type VectorIterator<T>::operator-(const VectorIterator &other) {
+typename VectorIterator<T>::difference_type VectorIterator<T>::operator-(
+    const VectorIterator &other) {
   return cur_pos_ - other.cur_pos_;
 }
 

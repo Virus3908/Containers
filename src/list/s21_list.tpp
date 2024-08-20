@@ -208,7 +208,11 @@ typename list<T>::size_type list<T>::size() const {
 
 template <typename T>
 typename list<T>::size_type list<T>::max_size() const {
-  return (std::numeric_limits<std::size_t>::max() / sizeof(Node));
+#if defined(__linux__)
+  return (std::numeric_limits<std::ptrdiff_t>::max()) / sizeof(Node);
+#else
+  return std::numeric_limits<std::ptrdiff_t>::max() / (sizeof(Node) / 2U);
+#endif
 }
 
 template <typename T>

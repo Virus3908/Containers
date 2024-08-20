@@ -75,8 +75,8 @@ multiset<T>::equal_range(const value_type &key) {
 
 template <typename T>
 template <typename... Args>
-std::vector<std::pair<typename multiset<T>::iterator, bool>> multiset<T>::insert_many(
-    Args &&...args) {
+std::vector<std::pair<typename multiset<T>::iterator, bool>>
+multiset<T>::insert_many(Args &&...args) {
   std::vector<std::pair<typename multiset<T>::iterator, bool>> res;
   for (auto &arg : {args...}) {
     res.push_back(insert(arg));

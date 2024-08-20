@@ -75,12 +75,16 @@ typename map<KEY, T>::iterator map<KEY, T>::end() {
 
 template <typename KEY, typename T>
 typename map<KEY, T>::const_iterator map<KEY, T>::begin() const {
-  return static_cast<const RBTree<value_type, MapComparator<value_type>> &>(*tree_).begin();
+  return static_cast<const RBTree<value_type, MapComparator<value_type>> &>(
+             *tree_)
+      .begin();
 }
 
 template <typename KEY, typename T>
 typename map<KEY, T>::const_iterator map<KEY, T>::end() const {
-  return static_cast<const RBTree<value_type, MapComparator<value_type>> &>(*tree_).end();
+  return static_cast<const RBTree<value_type, MapComparator<value_type>> &>(
+             *tree_)
+      .end();
 }
 
 template <typename KEY, typename T>

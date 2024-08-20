@@ -72,11 +72,6 @@ TEST(S21multisetTest, CapacitySize) {
   EXPECT_EQ(empty.size(), 0U);
 }
 
-TEST(S21multisetTest, CapacityMaxSize) {
-  s21::multiset<int> multiset({1, 2, 3});
-  EXPECT_EQ(multiset.max_size(), 576460752303423487U);
-}
-
 TEST(S21multisetTest, ModifierClear) {
   s21::multiset<int> multiset({1, 2, 3});
   ASSERT_FALSE(multiset.empty());

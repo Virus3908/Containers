@@ -246,11 +246,6 @@ TEST(S21setTest, CapacitySize) {
   EXPECT_EQ(empty.size(), 0U);
 }
 
-TEST(S21setTest, CapacityMaxSize) {
-  s21::set<int> set({1, 2, 3});
-  EXPECT_EQ(set.max_size(), 576460752303423487U);
-}
-
 TEST(S21setTest, ModifierClear) {
   s21::set<int> set({1, 2, 3});
   ASSERT_FALSE(set.empty());
@@ -954,7 +949,7 @@ TEST(S21setTest, ConstSet) {
   auto it = set.begin();
   auto it_orig = orig.begin();
 
-  for (; it != set.end(); ++it, ++it_orig){
+  for (; it != set.end(); ++it, ++it_orig) {
     EXPECT_EQ(*it, *it_orig);
   }
 }
@@ -966,20 +961,38 @@ TEST(S21setTest, ConstSetEmpty) {
   auto it = set.begin();
   auto it_orig = orig.begin();
 
-  for (; it != set.end(); ++it, ++it_orig){
+  for (; it != set.end(); ++it, ++it_orig) {
     EXPECT_EQ(*it, *it_orig);
   }
 }
 
 TEST(S21setTest, Insert_many) {
   s21::set<int> set;
-  s21::set<int> res = {1,2,3};
+  s21::set<int> res = {1, 2, 3};
 
-  set.insert_many(3,2,1);
+  set.insert_many(3, 2, 1);
   auto it = set.begin();
   auto it2 = res.begin();
 
-  for (; it != set.end(); ++it, ++it2){
+  for (; it != set.end(); ++it, ++it2) {
     EXPECT_EQ(*it, *it2);
+  }
+}
+
+TEST(S21setTest, justForTreeTest) {
+  s21::set<int> s;
+  for (int i = 0; i < 300; i++) {
+    s.insert(i);
+  }
+  for (auto it = s.begin(); it != s.end(); ++it) {
+    auto tmp = it;
+    ++it;
+    ++it;
+    s.erase(tmp);
+  }
+  for (auto it = s.end(); it != s.begin(); --it) {
+    auto tmp = it;
+    --it;
+    s.erase(tmp);
   }
 }

@@ -21,7 +21,7 @@ struct Node_tree {
   Node_tree *parent_;
   Node_tree *left_;
   Node_tree *right_;
-  char color_;
+  int color_;
   T val_;
   Node_tree(T val = T(), Node_tree *par = nullptr, Node_tree *left = nullptr,
             Node_tree *right = nullptr, int color = BLACK)

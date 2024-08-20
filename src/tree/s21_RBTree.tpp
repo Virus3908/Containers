@@ -81,7 +81,11 @@ typename RBTree<T, Comparator>::size_type RBTree<T, Comparator>::size() const {
 template <typename T, typename Comparator>
 typename RBTree<T, Comparator>::size_type RBTree<T, Comparator>::max_size()
     const {
-  return (std::numeric_limits<std::size_t>::max() / sizeof(Node));
+#if defined(__linux__)
+  return (std::numeric_limits<std::ptrdiff_t>::max()) / sizeof(Node);
+#else
+  return std::numeric_limits<std::ptrdiff_t>::max() / (sizeof(Node) / 2U);
+#endif
 }
 
 template <typename T, typename Comparator>
@@ -463,12 +467,12 @@ typename RBTree<T, Comparator>::Node *RBTree<T, Comparator>::LeftBalanceErase(
 
   if (bro->color_ == BLACK) {
     if (bro->right_->color_ == RED) {
-      std::swap(bro->color_, parent->color_);
       bro->right_->color_ = BLACK;
+      std::swap(bro->color_, parent->color_);
       LeftRotate(parent);
       *is_break = true;
     } else if (bro->left_->color_ == RED) {
-      std::swap(bro->color_, parent->color_);
+      std::swap(bro->color_, bro->left_->color_);
       RightRotate(bro);
     } else {
       bro->color_ = RED;
@@ -498,7 +502,7 @@ typename RBTree<T, Comparator>::Node *RBTree<T, Comparator>::RightBalanceErase(
       RightRotate(parent);
       *is_break = true;
     } else if (bro->right_->color_ == RED) {
-      std::swap(bro->color_, parent->color_);
+      std::swap(bro->color_, bro->right_->color_);
       LeftRotate(bro);
     } else {
       bro->color_ = RED;
@@ -551,7 +555,7 @@ void RBTree<T, Comparator>::BalanceErase(Node *node) {
 //     if (indent) {
 //       std::cout << std::setw(indent) << ' ';
 //     }
-//     std::cout << node->color_ << '\n';
+//     std::cout << indent << ':' << node->color_ << '\n';
 //     if (node->left_ != nil_) {
 //       PrintTree(node->left_, indent + space);
 //     }

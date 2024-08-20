@@ -1872,7 +1872,7 @@ TEST(map, ConstMap) {
   const std::map<int, int> orig_map = {{1, 1}, {4, 4}, {2, 2}};
   auto it = my_map.begin();
   auto it_std = orig_map.begin();
-  for (; it != my_map.end(); ++it, ++it_std){
+  for (; it != my_map.end(); ++it, ++it_std) {
     EXPECT_EQ((*it).first, (*it_std).first);
     EXPECT_EQ((*it).second, (*it_std).second);
   }
@@ -1880,12 +1880,13 @@ TEST(map, ConstMap) {
 
 TEST(map, insert_many) {
   s21::map<int, int> my_map = {{1, 1}, {4, 4}, {2, 2}};
-  const std::map<int, int> orig_map = {{1, 1}, {4, 4}, {2, 2}, {3, 3}, {5, 5}, {6, 6}};
-  
+  const std::map<int, int> orig_map = {{1, 1}, {4, 4}, {2, 2},
+                                       {3, 3}, {5, 5}, {6, 6}};
+
   my_map.insert_many(std::pair(3, 3), std::pair(5, 5), std::pair(6, 6));
   auto it = my_map.begin();
   auto it_std = orig_map.begin();
-  for (; it != my_map.end(); ++it, ++it_std){
+  for (; it != my_map.end(); ++it, ++it_std) {
     EXPECT_EQ((*it).first, (*it_std).first);
     EXPECT_EQ((*it).second, (*it_std).second);
   }

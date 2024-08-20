@@ -46,7 +46,7 @@ class set {
   template <class... Args>
   std::vector<std::pair<iterator, bool>> insert_many(Args &&...args);
 
-  // protected:
+ protected:
   tree *tree_;
 };
 }  // namespace s21

@@ -7,7 +7,7 @@ vector<T>::vector() : arr_(nullptr) {}
 
 template <typename T>
 vector<T>::vector(size_type n)
-    : arr_(n ? new value_type[n] : nullptr), size_(n), capacity_(n) {}
+    : arr_(n ? new value_type[n]() : nullptr), size_(n), capacity_(n) {}
 
 template <typename T>
 vector<T>::vector(std::initializer_list<value_type> const &items) : vector() {
@@ -39,7 +39,7 @@ vector<T> &vector<T>::operator=(const vector &other) {
     size_ = other.size_;
     capacity_ = other.capacity_;
     arr_ = new value_type[capacity_]();
-    for (size_type i = 0; i < other.size_; ++i){
+    for (size_type i = 0; i < other.size_; ++i) {
       arr_[i] = other.arr_[i];
     }
   }
@@ -161,7 +161,7 @@ void vector<T>::reserve(size_type size) {
     capacity_ = size;
     value_type *tmp = new value_type[capacity_]();
     size_type i = 0;
-    for (auto it = begin(); it != end(); ++it, ++i){
+    for (auto it = begin(); it != end(); ++it, ++i) {
       tmp[i] = *it;
     }
     delete[] arr_;
@@ -205,7 +205,7 @@ void vector<T>::erase(iterator pos) {
     throw std::out_of_range("Out of range");
   }
   std::copy(data(), data() + index, arr_);
-  std::copy(data() + index + 1, data()+size_, arr_ + index);
+  std::copy(data() + index + 1, data() + size_, arr_ + index);
   --size_;
 }
 
