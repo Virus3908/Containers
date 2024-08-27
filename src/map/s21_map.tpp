@@ -6,7 +6,8 @@ template <typename KEY, typename T, typename Compare>
 map<KEY, T, Compare>::map() : tree_(new tree()) {}
 
 template <typename KEY, typename T, typename Compare>
-map<KEY, T, Compare>::map(std::initializer_list<value_type> const &items) : map() {
+map<KEY, T, Compare>::map(std::initializer_list<value_type> const &items)
+    : map() {
   for (auto it : items) {
     insert(it);
   }
@@ -16,7 +17,8 @@ template <typename KEY, typename T, typename Compare>
 map<KEY, T, Compare>::map(const map &other) : tree_(new tree(*other.tree_)) {}
 
 template <typename KEY, typename T, typename Compare>
-map<KEY, T, Compare>::map(map &&other) : tree_(new tree(std::move(*other.tree_))) {}
+map<KEY, T, Compare>::map(map &&other)
+    : tree_(new tree(std::move(*other.tree_))) {}
 
 template <typename KEY, typename T, typename Compare>
 map<KEY, T, Compare>::~map() {
@@ -40,7 +42,8 @@ map<KEY, T, Compare> map<KEY, T, Compare>::operator=(const map &other) {
 }
 
 template <typename KEY, typename T, typename Compare>
-typename map<KEY, T, Compare>::mapped_type &map<KEY, T, Compare>::at(const key_type &key) {
+typename map<KEY, T, Compare>::mapped_type &map<KEY, T, Compare>::at(
+    const key_type &key) {
   value_type find_this_key(key, mapped_type());
   iterator it = tree_->Find(find_this_key);
   if (it == tree_->end()) {
@@ -74,17 +77,15 @@ typename map<KEY, T, Compare>::iterator map<KEY, T, Compare>::end() {
 }
 
 template <typename KEY, typename T, typename Compare>
-typename map<KEY, T, Compare>::const_iterator map<KEY, T, Compare>::begin() const {
-  return static_cast<const RBTree<value_type, value_compare> &>(
-             *tree_)
-      .begin();
+typename map<KEY, T, Compare>::const_iterator map<KEY, T, Compare>::begin()
+    const {
+  return static_cast<const RBTree<value_type, value_compare> &>(*tree_).begin();
 }
 
 template <typename KEY, typename T, typename Compare>
-typename map<KEY, T, Compare>::const_iterator map<KEY, T, Compare>::end() const {
-  return static_cast<const RBTree<value_type, value_compare> &>(
-             *tree_)
-      .end();
+typename map<KEY, T, Compare>::const_iterator map<KEY, T, Compare>::end()
+    const {
+  return static_cast<const RBTree<value_type, value_compare> &>(*tree_).end();
 }
 
 template <typename KEY, typename T, typename Compare>
@@ -98,7 +99,8 @@ typename map<KEY, T, Compare>::size_type map<KEY, T, Compare>::size() const {
 }
 
 template <typename KEY, typename T, typename Compare>
-typename map<KEY, T, Compare>::size_type map<KEY, T, Compare>::max_size() const {
+typename map<KEY, T, Compare>::size_type map<KEY, T, Compare>::max_size()
+    const {
   return tree_->max_size();
 }
 
@@ -108,22 +110,23 @@ void map<KEY, T, Compare>::clear() {
 }
 
 template <typename KEY, typename T, typename Compare>
-std::pair<typename map<KEY, T, Compare>::iterator, bool> map<KEY, T, Compare>::insert(
-    const value_type &value) {
+std::pair<typename map<KEY, T, Compare>::iterator, bool>
+map<KEY, T, Compare>::insert(const value_type &value) {
   return tree_->insertUnique(value);
 }
 
 template <typename KEY, typename T, typename Compare>
-std::pair<typename map<KEY, T, Compare>::iterator, bool> map<KEY, T, Compare>::insert(
-    const key_type &key, const mapped_type &obj) {
+std::pair<typename map<KEY, T, Compare>::iterator, bool>
+map<KEY, T, Compare>::insert(const key_type &key, const mapped_type &obj) {
   value_type val(key, obj);
   std::pair<iterator, bool> res = tree_->insertUnique(val);
   return res;
 }
 
 template <typename KEY, typename T, typename Compare>
-std::pair<typename map<KEY, T, Compare>::iterator, bool> map<KEY, T, Compare>::insert_or_assign(
-    const key_type &key, const mapped_type &obj) {
+std::pair<typename map<KEY, T, Compare>::iterator, bool>
+map<KEY, T, Compare>::insert_or_assign(const key_type &key,
+                                       const mapped_type &obj) {
   value_type val(key, obj);
   std::pair<iterator, bool> res = tree_->insertUnique(val);
   if (!res.second) {

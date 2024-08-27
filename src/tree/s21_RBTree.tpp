@@ -328,6 +328,7 @@ void RBTree<T, Comparator>::swap(RBTree &other) {
   std::swap(root_, other.root_);
   std::swap(nil_, other.nil_);
   std::swap(size_, other.size_);
+  std::swap(comp_, other.comp_);
 }
 
 template <typename T, typename Comparator>
