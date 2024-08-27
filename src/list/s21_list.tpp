@@ -351,26 +351,20 @@ template <typename T>
 template <typename... Args>
 typename list<T>::iterator list<T>::insert_many(const_iterator pos,
                                                 Args &&...args) {
-  for (const auto &arg : {args...}) {
-    insert(pos, arg);
-  }
+  (insert(pos, std::forward<Args>(args)), ...);
   return pos;
 }
 
 template <typename T>
 template <typename... Args>
 void list<T>::insert_many_back(Args &&...args) {
-  for (const auto &arg : {args...}) {
-    push_back(arg);
-  }
+  (push_back(std::forward<Args>(args)), ...);
 }
 
 template <typename T>
 template <typename... Args>
 void list<T>::insert_many_front(Args &&...args) {
-  for (const auto &arg : {args...}) {
-    push_front(arg);
-  }
+  (push_front(std::forward<Args>(args)), ...);
 }
 
 };  // namespace s21

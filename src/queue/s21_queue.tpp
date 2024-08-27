@@ -129,9 +129,7 @@ void queue<T>::swap(queue &other) {
 template <typename T>
 template <typename... Args>
 void queue<T>::insert_many_back(Args &&...args) {
-  for (const auto &arg : {args...}) {
-    push(arg);
-  }
+  (push(std::forward<Args>(args)), ...);
 }
 
 }  // namespace s21

@@ -5,14 +5,14 @@
 
 namespace s21 {
 
-template <typename T>
-class multiset : public set<T> {
+template <typename T, typename Compare = std::less<T>>
+class multiset : public set<T, Compare> {
  public:
   using value_type = T;
   using reference = value_type &;
   using const_reference = const value_type &;
   using size_type = size_t;
-  using tree = RBTree<value_type>;
+  using tree = RBTree<value_type, Compare>;
   using iterator = typename tree::iterator;
   using const_iterator = typename tree::const_iterator;
 

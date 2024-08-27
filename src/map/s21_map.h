@@ -5,21 +5,23 @@
 
 namespace s21 {
 
-template <typename T>
-struct MapComparator {
-  bool operator()(T val1, T val2) { return val1.first < val2.first; }
-};
-
-template <typename KEY, typename T>
+template <typename KEY, typename T, typename Compare = std::less<KEY>>
 class map {
  public:
   using key_type = KEY;
   using mapped_type = T;
-  using value_type = std::pair<key_type, mapped_type>;
+  using value_type = std::pair<const key_type, mapped_type>;
   using reference = value_type &;
   using const_reference = const value_type &;
   using size_type = size_t;
-  using tree = RBTree<value_type, MapComparator<value_type>>;
+  class value_compare {
+   public:
+    bool operator()(value_type val1, value_type val2) {
+      Compare comp;
+      return comp(val1.first, val2.first);
+    }
+  };
+  using tree = RBTree<value_type, value_compare>;
   using iterator = typename tree::iterator;
   using const_iterator = typename tree::const_iterator;
 

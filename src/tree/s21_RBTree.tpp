@@ -353,8 +353,7 @@ void RBTree<T, Comparator>::mergeUnique(RBTree &other) {
 template <typename T, typename Comparator>
 typename RBTree<T, Comparator>::Node *RBTree<T, Comparator>::CopyTree(
     Node *node, Node *nil) {
-  Node *new_node = new Node{};
-  new_node->val_ = node->val_;
+  Node *new_node = new Node{node->val_};
   new_node->color_ = node->color_;
   if (node->parent_ == nil) {
     new_node->parent_ = nil_;

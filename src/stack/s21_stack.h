@@ -38,7 +38,7 @@ class stack {
 
  private:
   Node *top_;
-  size_type size_;
+  size_type size_ = 0U;
 
   void clear();
   void copy(const stack &other);

@@ -2,7 +2,7 @@
 namespace s21 {
 
 template <typename T>
-TreeIterator<T>::TreeIterator() : cur_pos_(nullptr) {}
+TreeIterator<T>::TreeIterator() : cur_pos_(nullptr), nil_(nullptr) {}
 
 template <typename T>
 TreeIterator<T>::TreeIterator(Node *node, Node *nil)

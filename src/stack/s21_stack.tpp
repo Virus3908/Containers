@@ -117,9 +117,7 @@ void stack<T>::copy(const stack &other) {
 template <typename T>
 template <typename... Args>
 void stack<T>::insert_many_front(Args &&...args) {
-  for (const auto &arg : {args...}) {
-    push(arg);
-  }
+  (push(std::forward<Args>(args)), ...);
 }
 
 }  // namespace s21

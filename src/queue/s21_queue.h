@@ -40,7 +40,7 @@ class queue {
  private:
   Node *top_;
   Node *bottom_;
-  size_type size_;
+  size_type size_ = 0U;
 
   void clear();
 };
